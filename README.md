@@ -1,3 +1,3 @@
 # RestEngine
 
-A description of this package.
+Swift package manger for URL Session calls.
