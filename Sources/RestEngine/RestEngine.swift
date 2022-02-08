@@ -58,6 +58,16 @@ extension RestSession {
         if type == .post || type == .put { request.httpBody = getHttpBody(from: resource.parameters) }
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in
+            
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    print("response",json)
+                } catch {
+                    print("Serialization Error",error)
+                }
+            }
+
             do {
                 if let data = data {
                     let result = try JSONDecoder().decode(T.self, from: data)
